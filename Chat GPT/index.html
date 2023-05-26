@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registracija</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 35px;
+            color: #000;
+        }
+        
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        
+        .title {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 35px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .form-group button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 35px;
+            border-radius: 4px;
+        }
+    </style>
+    <script>
+        function registerUser() {
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            
+            // Ovde možete dodati logiku za registraciju korisnika, na primer slanje podataka na server, validacija itd.
+            
+            // Preusmeravanje na forum.html nakon registracije
+            window.location.href = "forum.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Registracija</h1>
+    </div>
+    
+    <div class="container">
+        <h2 class="title">Dobrodošli, molimo Vas registrujte se</h2>
+        
+        <div class="register-form">
+            <div class="form-group">
+                <label for="username">Korisničko ime:</label>
+                <input type="text" id="username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Šifra:</label>
+                <input type="password" id="password">
+            </div>
+            <div class="form-group">
+                <button onclick="registerUser()">Registruj se</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

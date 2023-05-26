@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-form {
+            margin-bottom: 20px;
+        }
+        
+        .question-form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .post {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .post p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .post .date {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .reply-icon {
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .reply-form {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .reply-form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            resize: vertical;
+        }
+        
+        .reply-form button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Forum</h1>
+    </div>
+    
+    <div class="container">
+        <div class="question-form">
+            <textarea id="question-input" rows="5" placeholder="Postavite pitanje"></textarea>
+            <button onclick="askQuestion()">Postavi pitanje</button>
+        </div>
+        
+        <div id="posts-container"></div>
+    </div>
+    
+    <script>
+        function askQuestion() {
+            var questionInput = document.getElementById("question-input");
+            var question = questionInput.value;
+            
+            if (question !== "") {
+                var date = new Date().toLocaleString();
+                var postHTML = `
+                    <div class="post">
+                        <h2>Pitanje</h2>
+                        <p>${question}</p>
+                        <p class="date">${date}</p>
+                        <span class="reply-icon" onclick="toggleReplyForm(this)">Odgovori</span>
+                        <div class="reply-form">
+                            <textarea rows="3" placeholder="Odgovor"></textarea>
+                            <button onclick="submitReply(this)">Pošalji</button>
+                        </div>
+                    </div>
+                `;
+                
+                var postsContainer = document.getElementById("posts-container");
+                postsContainer.innerHTML += postHTML;
+                
+                questionInput.value = "";
+            }
+        }
+        
+        function toggleReplyForm(replyIcon) {
+            var replyForm = replyIcon.nextElementSibling;
+            if (replyForm.style.display === "none") {
+                replyForm.style.display = "block";
+            } else {
+                replyForm.style.display = "none";
+            }
+        }
+        
+        function submitReply(replyButton) {
+            var replyInput = replyButton.previousElementSibling;
+            var reply = replyInput.value;
+            
+            if (reply !== "") {
+                var date = new Date().toLocaleString();
+                var replyHTML = `
+                    <div class="reply">
+                        <p>${reply}</p>
+                        <p class="date">${date}</p>
+                    </div>
+                `;
+                
+                var replyForm = replyButton.parentNode;
+                replyForm.insertAdjacentHTML("beforebegin", replyHTML);
+                
+                replyInput.value = "";
+                replyForm.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
